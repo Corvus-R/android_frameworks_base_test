@@ -120,6 +120,7 @@ public class Clock extends TextView implements
     protected boolean mShowClock = true;
     private int mAmPmStyle;
     protected boolean mQsHeader;
+    private boolean mScreenOn = true;
     private boolean mShowSeconds;
     private Handler mSecondsHandler;
     private SettingsObserver mSettingsObserver;
@@ -245,6 +246,8 @@ public class Clock extends TextView implements
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
             filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             filter.addAction(Intent.ACTION_USER_SWITCHED);
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
 
             // NOTE: This receiver could run before this method returns, as it's not dispatching
             // on the main thread and BroadcastDispatcher may not need to register with Context.
@@ -316,7 +319,16 @@ public class Clock extends TextView implements
                     return;
                 });
             }
-            handler.post(() -> updateClock());
+
+            if (action.equals(Intent.ACTION_SCREEN_ON)) {
+                mScreenOn = true;
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+                mScreenOn = false;
+            }
+
+            if (mScreenOn) {
+                handler.post(() -> updateClock());
+            }
         }
     };
 
