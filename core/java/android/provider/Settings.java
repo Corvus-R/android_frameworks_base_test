@@ -5255,6 +5255,12 @@ public final class Settings {
         public static final String ALERTSLIDER_MODE_POSITION_TOP = "alertslider_mode_position_top";
 
         /**
+         * Double tap on lockscreen to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN = "double_tap_sleep_lockscreen";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -5390,6 +5396,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_BOTTOM);
             PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_MIDDLE);
             PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_TOP);
+            PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
         }
 
         /**
