@@ -73,4 +73,9 @@
     <java-symbol type="string" name="alert_slider_mode_vibrate" />
     <java-symbol type="string" name="alert_slider_mode_silent" />
     <java-symbol type="string" name="alert_slider_mode_dnd" />
+
+    <!-- HW keys binding -->
+    <java-symbol type="anim" name="custom_app_in" />
+    <java-symbol type="anim" name="custom_app_out" />
+    <java-symbol type="integer" name="config_deviceHardwareKeys" />
 </resources>
