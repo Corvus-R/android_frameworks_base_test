@@ -102,4 +102,8 @@
 
     <!-- QQS Height -->
     <java-symbol type="dimen" name="quick_qs_total_height" />
+
+    <!-- Light / Regular style fonts -->
+    <java-symbol type="string" name="config_lightFontFamily" />
+    <java-symbol type="string" name="config_regularFontFamily" />
 </resources>
