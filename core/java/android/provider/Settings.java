@@ -5376,6 +5376,10 @@ public final class Settings {
          */
         public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
 
+        /** @hide */
+        public static final String BACK_GESTURE_HAPTIC = "back_gesture_haptic";
+
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
@@ -5514,6 +5518,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_TOP);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
         }
 
         /**
