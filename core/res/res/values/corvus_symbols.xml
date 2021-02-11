@@ -66,4 +66,11 @@
     <java-symbol type="id" name="aerr_copy" />
     <java-symbol type="string" name="url_copy_success" />
     <java-symbol type="string" name="url_copy_failed" />
+
+    <!-- AlertSlider modes -->
+    <java-symbol type="string" name="alert_slider_mode_normal" />
+    <java-symbol type="string" name="alert_slider_mode_priority" />
+    <java-symbol type="string" name="alert_slider_mode_vibrate" />
+    <java-symbol type="string" name="alert_slider_mode_silent" />
+    <java-symbol type="string" name="alert_slider_mode_dnd" />
 </resources>
