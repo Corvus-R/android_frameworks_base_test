@@ -37,4 +37,7 @@
     
     <!-- FPSInfoService FPS node file path -->
     <string name="config_fpsInfoSysNode" translatable="false"></string>
+
+    <!-- Whether alertslider is on the left edge of the device -->
+    <bool name="config_alertSliderOnLeft">false</bool>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2021 CorvusOS
+<!-- Copyright (C) 2021 AOSP-Krypton Project
+
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -13,19 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+     android:shape="rectangle">
 
-    <string-array translatable="false" name="config_rebootActionsList">
-        <item>restart</item>
-        <item>reboot_recovery</item>
-        <item>reboot_bootloader</item>
-        <item>reboot_systemui</item>
-    </string-array>
+     <solid android:color="?androidprv:attr/colorSurface" />
 
-    <!-- Udfps vendor code -->
-    <integer name="config_udfps_vendor_code">22</integer>
-
-    <!-- Whether alertslider is on the left edge of the device -->
-    <bool name="config_alertSliderOnLeft">false</bool>
-
-</resources>
+</shape>
