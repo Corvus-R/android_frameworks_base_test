@@ -106,4 +106,7 @@
     <!-- Light / Regular style fonts -->
     <java-symbol type="string" name="config_lightFontFamily" />
     <java-symbol type="string" name="config_regularFontFamily" />
+
+    <!-- Wheter device supports an gaming mode profiles -->
+    <java-symbol type="bool" name="config_gamingmode_performance" />
 </resources>

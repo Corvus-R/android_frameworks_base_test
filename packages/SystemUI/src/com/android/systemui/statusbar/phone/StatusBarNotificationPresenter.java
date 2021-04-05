@@ -24,10 +24,13 @@ import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.app.Notification;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
@@ -134,6 +137,8 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
     private TextView mNotificationPanelDebugText;
 
     protected boolean mVrMode;
+    private boolean mGamingModeActive;
+    private boolean mGamingModeNoAlert;
 
     private Context mContext;
     ActivityManager mAm;
@@ -179,6 +184,11 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
         mBarService = IStatusBarService.Stub.asInterface(
                 ServiceManager.getService(Context.STATUS_BAR_SERVICE));
         mAm = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+
+        mGamingModeActive = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.GAMING_MODE_ACTIVE, 0, UserHandle.USER_CURRENT) != 0;
+        mGamingModeNoAlert = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT, 1, UserHandle.USER_CURRENT) != 0;
 
         IVrManager vrManager = IVrManager.Stub.asInterface(ServiceManager.getService(
                 Context.VR_SERVICE));
@@ -261,6 +271,14 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
     @Override
     public void onOverlayChanged() {
         onDensityOrFontScaleChanged();
+    }
+
+    public void setGamingModeActive(boolean value) {
+        mGamingModeActive = value;
+    }
+
+    public void setGamingModeNoAlert(boolean value) {
+        mGamingModeNoAlert = value;
     }
 
     private void updateNotificationOnUiModeChanged() {
@@ -567,7 +585,14 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
 
         @Override
         public boolean suppressAwakeInterruptions(NotificationEntry entry) {
-            return isDeviceInVrMode();
+            if (isDeviceInVrMode()) {
+                return true;
+            } else {
+                final Notification notification = entry.getSbn().getNotification();
+                return (mGamingModeActive && mGamingModeNoAlert &&
+                    !TextUtils.equals(notification.category, Notification.CATEGORY_CALL) &&
+                    !TextUtils.equals(notification.category, Notification.CATEGORY_ALARM));
+            }
         }
 
         @Override

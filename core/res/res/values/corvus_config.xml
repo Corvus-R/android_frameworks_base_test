@@ -92,4 +92,7 @@
 
     <!-- Name of a font family to use as regular font. For theming purpose. -->
     <string name="config_regularFontFamily" translatable="false">sans-serif-regular</string>
+
+    <!-- Wheter device supports an gaming mode profiles -->
+    <bool name="config_gamingmode_performance">false</bool>
 </resources>

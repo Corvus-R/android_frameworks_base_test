@@ -307,6 +307,13 @@ public class StatusBar extends SystemUI implements DemoMode,
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
     static public final String SYSTEM_DIALOG_REASON_SCREENSHOT = "screenshot";
 
+    private static final String LESS_BORING_HEADS_UP =
+            "system:" + Settings.System.LESS_BORING_HEADS_UP;
+    private static final String GAMING_MODE_ACTIVE =
+            "system:" + Settings.System.GAMING_MODE_ACTIVE;
+    private static final String GAMING_MODE_DISABLE_NOTIFICATION_ALERT =
+            "system:" + Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT;
+
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
     private static final String BANNER_ACTION_SETUP =
@@ -4891,6 +4898,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_ACTIVE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4904,6 +4917,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.FORCE_SHOW_NAVBAR))) {
                 updateNavigationBarVisibility();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_ACTIVE))) {
+                isGamingModeActive();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT))) {
+                disableNotificationsGamingMode();
             }
             update();
         }
@@ -4915,6 +4934,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpBlacklist();
             setUseLessBoringHeadsUp();
             setScreenBrightnessMode();
+            isGamingModeActive();
+            disableNotificationsGamingMode();
         }
     }
 
@@ -4979,6 +5000,24 @@ public class StatusBar extends SystemUI implements DemoMode,
         mBrightnessControl = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
             UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void isGamingModeActive() {
+        boolean gamingModeActive = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.GAMING_MODE_ACTIVE, 0,
+                UserHandle.USER_CURRENT) == 1;
+        if (mPresenter != null) {
+            mPresenter.setGamingModeActive(gamingModeActive);
+        }
+    }
+
+    private void disableNotificationsGamingMode() {
+        boolean gamingModeNoAlert = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.GAMING_MODE_ACTIVE, 0,
+                UserHandle.USER_CURRENT) == 1;
+        if (mPresenter != null) {
+            mPresenter.setGamingModeNoAlert(gamingModeNoAlert);
+        }
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
