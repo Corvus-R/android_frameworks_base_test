@@ -149,6 +149,7 @@ public class PixelPropsUtils {
     public static void setProps(String packageName) {
         if (packageName.equals(PACKAGE_GMS)) {
             sIsGms = true;
+            setPropValue("TYPE", "userdebug");
         }
         if (packageName == null){
             return;
