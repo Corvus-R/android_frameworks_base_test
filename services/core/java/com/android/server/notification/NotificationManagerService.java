@@ -7812,6 +7812,8 @@ public class NotificationManagerService extends SystemService {
             int index = mToastQueue.indexOf(record);
             if (index >= 0) {
                 mToastQueue.remove(index);
+                mWindowManagerInternal.removeWindowToken(record.windowToken,
+                        true /* removeWindows */, record.displayId);
             }
             record = (mToastQueue.size() > 0) ? mToastQueue.get(0) : null;
         }
