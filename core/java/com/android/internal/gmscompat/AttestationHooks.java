@@ -31,7 +31,7 @@ public final class AttestationHooks {
     private static final String PROCESS_UNSTABLE = "com.google.android.gms.unstable";
 
     private static final String PRODUCT_STOCK_FINGERPRINT =
-            SystemProperties.get("ro.build.stock_fingerprint");
+            SystemProperties.get("ro.build.fingerprint");
 
     private static volatile boolean sIsGms = false;
 
