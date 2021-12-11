@@ -36,8 +36,9 @@ public class PixelPropsUtils {
     private static final Map<String, Object> propsToChangePixel3XL;
     private static final Map<String, Object> propsToChangePixel2;
 
-    private static final Map<String, Object> propsToChangePUBG;
-    private static final Map<String, Object> propsToChangeCOD;
+    private static final Map<String, Object> propsToChangeROG1;
+    private static final Map<String, Object> propsToChangeXP5;
+    private static final Map<String, Object> propsToChangeOP8P;
 
     private static final String[] packagesToChange = {
             "com.android.vending",
@@ -97,18 +98,34 @@ public class PixelPropsUtils {
             "com.google.android.gms.location.history"
     };
 
-    private static final String[] packagesToChangeCOD = {
-        "com.activision.callofduty.shooter"
+    // Gaming spoof
+    private static final String[] packagesToChangeROG1 = {
+            "com.dts.freefireth",
+            "com.dts.freefiremax",
+            "com.madfingergames.legends"
     };
 
-    private static final String[] packagesToChangePUBG = {
-        "com.tencent.ig",
-        "com.pubg.krmobile",
-        "com.vng.pubgmobile",
-        "com.rekoo.pubgm",
-        "com.pubg.imobile",
-        "com.pubg.newstate",
-        "com.gameloft.android.ANMP.GloftA9HM" // Asphalt 9
+    private static final String[] packagesToChangeXP5 = {
+            "com.activision.callofduty.shooter",
+            "com.tencent.tmgp.kr.codm",
+            "com.garena.game.codm",
+            "com.vng.codmvn"
+    };
+
+    private static final String[] packagesToChangeOP8P = {
+            "com.tencent.ig",
+            "com.pubg.imobile",
+            "com.pubg.krmobile",
+            "com.pubg.newstate",
+            "com.vng.pubgmobile",
+            "com.rekoo.pubgm",
+            "com.tencent.tmgp.pubgmhd",
+            "com.riotgames.league.wildrift",
+            "com.riotgames.league.wildrifttw",
+            "com.riotgames.league.wildriftvn",
+            "com.netease.lztgglobal",
+            "com.epicgames.fortnite",
+            "com.epicgames.portal"
     };
 
     static {
@@ -140,10 +157,14 @@ public class PixelPropsUtils {
         propsToChangePixel2.put("PRODUCT", "walleye");
         propsToChangePixel2.put("MODEL", "Pixel 2");
         propsToChangePixel2.put("FINGERPRINT", "google/walleye/walleye:8.1.0/OPM1.171019.011/4448085:user/release-keys");
-        propsToChangePUBG = new HashMap<>();
-        propsToChangePUBG.put("MODEL", "GM1917");
-        propsToChangeCOD = new HashMap<>();
-        propsToChangeCOD.put("MODEL", "SO-52A");
+        propsToChangeROG1 = new HashMap<>();
+        propsToChangeROG1.put("MODEL", "ASUS_Z01QD");
+        propsToChangeROG1.put("MANUFACTURER", "asus");
+        propsToChangeXP5 = new HashMap<>();
+        propsToChangeXP5.put("MODEL", "SO-52A");
+        propsToChangeOP8P = new HashMap<>();
+        propsToChangeOP8P.put("MODEL", "IN2020");
+        propsToChangeOP8P.put("MANUFACTURER", "OnePlus");
     }
 
     public static void setProps(String packageName) {
@@ -198,26 +219,28 @@ public class PixelPropsUtils {
                 setPropValue(key, value);
             }
         }
-        if (Arrays.asList(packagesToChangePUBG).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
+        if (Arrays.asList(packagesToChangeROG1).contains(packageName)) {
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeROG1.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
+            } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeXP5.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
+            } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeOP8P.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             }
-            for (Map.Entry<String, Object> prop : propsToChangePUBG.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
-        if (Arrays.asList(packagesToChangeCOD).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
-            }
-            for (Map.Entry<String, Object> prop : propsToChangeCOD.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
 
         // Set proper indexing fingerprint
         if (packageName.equals("com.google.android.settings.intelligence")){
