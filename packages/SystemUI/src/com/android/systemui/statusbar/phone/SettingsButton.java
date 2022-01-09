@@ -129,7 +129,7 @@ public class SettingsButton extends AlphaOptimizedImageButton {
                 .start();
     }
 
-    protected void startAccelSpin() {
+    public void startAccelSpin() {
         cancelAnimation();
         mAnimator = ObjectAnimator.ofFloat(this, View.ROTATION, 0, 360);
         mAnimator.setInterpolator(AnimationUtils.loadInterpolator(mContext,
@@ -156,7 +156,7 @@ public class SettingsButton extends AlphaOptimizedImageButton {
         mAnimator.start();
     }
 
-    protected void startContinuousSpin() {
+    public void startContinuousSpin() {
         cancelAnimation();
         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         mUpToSpeed = true;

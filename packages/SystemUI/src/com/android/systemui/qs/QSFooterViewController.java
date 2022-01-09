@@ -187,6 +187,10 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
                         mView.updateAnimator(
                                 right - left, mQuickQSPanelController.getNumQuickTiles()));
         mSettingsButton.setOnClickListener(mSettingsOnClickListener);
+        mSettingsButton.setOnLongClickListener(view -> {
+            mSettingsButton.startContinuousSpin();
+            return true;
+        });
         mBuildText.setOnLongClickListener(view -> {
             CharSequence buildText = mBuildText.getText();
             if (!TextUtils.isEmpty(buildText)) {
