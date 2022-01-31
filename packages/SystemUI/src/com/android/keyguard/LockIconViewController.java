@@ -270,8 +270,7 @@ public class LockIconViewController extends ViewController<LockIconView> impleme
         final CharSequence prevContentDescription = mView.getContentDescription();
         if (mShowLockIcon) {
             mView.setImageDrawable(mLockIcon);
-            mView.setBackgroundResource(R.drawable.rounded_bg_full_large_radius);
-            mView.setPaddingRelative(8, 8, 8, 8);
+            mView.setBackgroundResource(R.drawable.lock_icon_bg);
             mView.setVisibility(View.VISIBLE);
             mView.setContentDescription(mLockedLabel);
         } else if (mShowUnlockIcon) {
@@ -286,8 +285,7 @@ public class LockIconViewController extends ViewController<LockIconView> impleme
                     mLockToUnlockIcon.start();
                 } else {
                     mView.setImageDrawable(mUnlockIcon);
-                    mView.setBackgroundResource(R.drawable.rounded_bg_full_large_radius);
-                    mView.setPaddingRelative(8, 8, 8, 8);
+                    mView.setBackgroundResource(R.drawable.lock_icon_bg);
                 }
             }
             mView.setVisibility(View.VISIBLE);
