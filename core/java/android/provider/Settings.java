@@ -5430,12 +5430,6 @@ public final class Settings {
         public static final String CHARGING_ANIMATION = "charging_animation";
 
         /**
-         * Loop the charging animation
-         * @hide
-         */
-        public static final String CHARGING_ANIMATION_LOOP = "charging_animation_loop";
-
-        /**
          * Battery style
          * @hide
          */

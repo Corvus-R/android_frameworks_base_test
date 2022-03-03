@@ -21,8 +21,6 @@ import android.content.res.Configuration
 import android.graphics.PixelFormat
 import android.graphics.PointF
 import android.os.SystemProperties
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.View
@@ -65,7 +63,6 @@ class WiredChargingRippleController @Inject constructor(
 ) {
     private var pluggedIn: Boolean? = null
     private var rippleEnabled: Boolean = true;
-    private var loopAnimation: Boolean = true;
     private var normalizedPortPosX: Float = context.resources.getFloat(
             R.dimen.physical_charger_port_location_normalized_x)
     private var normalizedPortPosY: Float = context.resources.getFloat(
@@ -90,7 +87,6 @@ class WiredChargingRippleController @Inject constructor(
 
     init {
         pluggedIn = batteryController.isPluggedIn
-        val handler = Handler(Looper.getMainLooper())
         val batteryStateChangeCallback = object : BatteryController.BatteryStateChangeCallback {
             override fun onBatteryLevelChanged(
                 level: Int,
@@ -100,9 +96,6 @@ class WiredChargingRippleController @Inject constructor(
                 rippleEnabled = Settings.System.getInt(context.contentResolver,
                         Settings.System.CHARGING_ANIMATION, 1) == 1
 
-                loopAnimation = Settings.System.getInt(context.contentResolver,
-                        Settings.System.CHARGING_ANIMATION_LOOP, 1) == 1
-
                 // Suppresses the ripple when it's disabled, or when the state change comes
                 // from wireless charging.
                 if (!rippleEnabled || batteryController.isPluggedInWireless) {
@@ -111,16 +104,7 @@ class WiredChargingRippleController @Inject constructor(
                 val wasPluggedIn = pluggedIn
                 pluggedIn = nowPluggedIn
                 if ((wasPluggedIn == null || !wasPluggedIn) && nowPluggedIn) {
-                    if(loopAnimation){
-                        handler.post(object: Runnable {
-                            override fun run(){
-                                startRippleWithDebounce()
-                                handler.postDelayed(this, 3000)
-                            }
-                        })
-                    } else {
-                        startRippleWithDebounce()
-                    }
+                    startRippleWithDebounce()
                 }
             }
         }
