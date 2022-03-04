@@ -59,7 +59,6 @@ public class PixelPropsUtils {
             "com.google.android.contacts",
             "com.google.android.calculator",
             "com.google.android.apps.messaging",
-            "com.google.android.gm",
             "com.google.android.gms.location.history",
             "com.android.chrome",
             "com.google.android.inputmethod.latin",
@@ -70,10 +69,8 @@ public class PixelPropsUtils {
             "com.google.android.apps.turbo",
             "com.google.android.apps.wallpaper",
             "com.google.android.apps.googleassistant",
-            "com.google.android.apps.maps",
             "com.google.android.gms",
             "com.google.android.apps.nexuslauncher",
-            "com.android.chrome",
             "com.google.android.apps.maps",
             "com.google.android.apps.docs",
             "com.google.android.gm",
@@ -82,11 +79,21 @@ public class PixelPropsUtils {
             "com.google.android.calendar",
             "com.google.ar.lens",
             "com.google.android.keep",
-	    "com.google.android.calculator"
+	        "com.google.android.calculator"
     };
 
     private static final String[] packagesToChangePixelXL = {
-            "com.google.android.apps.photos"
+            "com.google.android.apps.photos",
+            "com.samsung.accessory",
+            "com.samsung.accessory.fridaymgr",
+            "com.samsung.accessory.berrymgr",
+            "com.samsung.accessory.neobeanmgr",
+            "com.samsung.android.app.watchmanager",
+            "com.samsung.android.geargplugin",
+            "com.samsung.android.gearnplugin",
+            "com.samsung.android.modenplugin",
+            "com.samsung.android.neatplugin",
+            "com.samsung.android.waterplugin"
     };
 
     private static final String[] packagesToChangePixel3XL = {
